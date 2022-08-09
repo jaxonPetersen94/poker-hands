@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "TCjKb4XiOm0WbCKMOzENkF5HBz12Neki4UAjdazhbCQ=",
+  "Source": "poker-hand-card-service",
+  "BasePath": "_content/poker-hand-card-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
