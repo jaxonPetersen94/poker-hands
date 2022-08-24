@@ -1,8 +1,10 @@
 # dependencies
 /Frontend/node_modules
-/Micro-services/.vs
 /.pnp
 .pnp.js
+.vs
+bin
+obj
 
 # testing
 /coverage

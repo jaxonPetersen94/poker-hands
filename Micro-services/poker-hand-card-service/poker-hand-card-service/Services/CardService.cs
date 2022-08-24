@@ -6,31 +6,31 @@ namespace poker_hand_card_service.Services
 {
     public class CardService : ICardService
     {
-        public IDeck _deckService;
-        public Card[] _cardDeck { get; set; }
-        private IHandEvaluator _handEvaluator;
+        private readonly IDeck _deckService;
+        private readonly IHandEvaluator _handEvaluator;
 
         public CardService(IDeck deck, IHandEvaluator handEvaluator)
         {
             _deckService = deck;
-            _deckService.ShuffleDeck();
-            _cardDeck = deck.cardDeck;
             _handEvaluator = handEvaluator;
         }
 
         public PlayerHand[] GetCards()
         {
-            PlayerHand[] playerHands = { new PlayerHand() { Cards = new Card[5], playerName = "Ted" }, new PlayerHand() { Cards = new Card[5], playerName = "Louis" } };
+            PlayerHand[] playerHands = { 
+                new PlayerHand() { Cards = new Card[5], playerName = "Ted" },
+                new PlayerHand() { Cards = new Card[5], playerName = "Louis" } 
+            };
             int cardsDealt = 0;
             for (int i = 0; i < 10; i++)
             {
                 if (i % 2 == 0)
                 {
-                    playerHands[0].Cards[cardsDealt / 2] = _cardDeck[i];
+                    playerHands[0].Cards[cardsDealt / 2] = _deckService.cardDeck[i];
                 }
                 else
                 {
-                    playerHands[1].Cards[cardsDealt / 2] = _cardDeck[i];
+                    playerHands[1].Cards[cardsDealt / 2] = _deckService.cardDeck[i];
                 }
                 cardsDealt++;
             }
@@ -43,6 +43,12 @@ namespace poker_hand_card_service.Services
             {
                 playerHands[i] = _handEvaluator.EvaluatePlayerHand(playerHands[i]);
             }
+            int winnerIndex = ComparePlayerHands(playerHands);
+            return Winner(winnerIndex, playerHands);
+        }
+
+        private int ComparePlayerHands(PlayerHand[] playerHands)
+        {
             int winnerIndex = 0;
             HandType bestHandType = playerHands[0].MyHandType;
             int highestHandValue = playerHands[0].MyHandValues.Total, highestCard = playerHands[0].MyHandValues.HighCard;
@@ -85,20 +91,20 @@ namespace poker_hand_card_service.Services
                     }
                 }
             }
+            return winnerIndex;
+        }
+
+        private Winner Winner(int winnerIndex, PlayerHand[] playerHands)
+        {
             if (winnerIndex == -1)
-            {
                 return new Winner() { IsWinner = true, WinnerName = "Tie Game", WinnerHandType = "", WinnerHighCard = "0" };
-            }
-            else
+            return new Winner()
             {
-                return new Winner() 
-                { 
-                    IsWinner = true, 
-                    WinnerName = playerHands[winnerIndex].playerName, 
-                    WinnerHandType = $"{playerHands[winnerIndex].MyHandType}", 
-                    WinnerHighCard = $"{(Card.VALUE)playerHands[winnerIndex].MyHandValues.HighCard}",
-                };
-            }
+                IsWinner = true,
+                WinnerName = playerHands[winnerIndex].playerName,
+                WinnerHandType = $"{playerHands[winnerIndex].MyHandType}",
+                WinnerHighCard = $"{(Card.VALUE)playerHands[winnerIndex].MyHandValues.HighCard}",
+            };
         }
     }
 }

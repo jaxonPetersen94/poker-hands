@@ -39,13 +39,13 @@ function Game() {
               {winnerHandType !== "" && (
                 <>
                   <br />
-                  {`HighCard: ${winnerHandType}`}
+                  {`Hand: ${winnerHandType}`}
                 </>
               )}
               {winnerHighCard !== "0" && (
                 <>
                   <br />
-                  {`HighCard: ${winnerHighCard}`}
+                  {`High-Card: ${winnerHighCard}`}
                 </>
               )}
             </>
