@@ -1,6 +1,6 @@
 # Poker Hands
 
-I went ahead and choose React to build the Frontend due to the amount of recent exposure I have had with it in my current position. As well as it's easy to use built in state management systems, a vast selection of third-party libraries such as Axios, and the enormous popularity and community support.
+I went ahead and chose React to build the Frontend due to the amount of recent exposure I have had with it in my current position. As well as the easy to use built in state management systems, a vast selection of third-party libraries such as Axios, and the enormous popularity and community support.
 
 <br/>
 
