@@ -1,10 +1,10 @@
 ﻿using poker_hand_card_service.Interfaces;
 using poker_hand_card_service.Models;
 
-namespace poker_hand_card_service.Data
+namespace poker_hand_card_service.Utils
 {
     public class Deck : IDeck
-    {  
+    {
         public Card[] cardDeck { get; set; }
 
         public Deck()
